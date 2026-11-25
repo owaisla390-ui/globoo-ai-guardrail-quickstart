@@ -26,6 +26,11 @@ Probabilistic LLM prompt filters cannot enforce hard financial invariants. When 
 ---
 
 ## Quickstart Integration (`v3.9`)
+## Enterprise Architecture & Security Documentation
+* **[`quickstart_example.py`](./quickstart_example.py)** — Drop-in fail-closed adapters for SAP S/4HANA, Stripe Payouts, NetSuite, and QuickBooks.
+* **[`ARCHITECTURE.md`](./ARCHITECTURE.md)** — Deep-dive on why probabilistic guardrails fail for treasury agents and how ~0.04ms deterministic VPC gating works.
+* **[`SECURITY.md`](./SECURITY.md)** — Zero-egress threat model, Ed25519 key separation, and Redis Lua / PostgreSQL `SERIALIZABLE` concurrency guarantees.
+* **[`ENTERPRISE_ONE_PAGER.md`](./ENTERPRISE_ONE_PAGER.md)** — 1-page executive summary, ROI profile, and commercial pilot tiers (`$499/mo` → `$25,000/mo`).
 
 See [`quickstart_example.py`](./quickstart_example.py) for fail-closed ERP adapters (`guard_sap_idoc`, `guard_stripe_payout`, `guard_netsuite_bill`, `guard_quickbooks_payment`), one-time CFO webhook verification, and compliance reporting.
 
