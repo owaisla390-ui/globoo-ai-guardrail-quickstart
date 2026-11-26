@@ -1,0 +1,32 @@
+{
+  "schema_version": "mcp-guardrail-v3.9",
+  "firewall": "GLOBOO AI Deterministic 6-Layer VPC Guardrail",
+  "deployment_mode": "zero-egress-local-vpc",
+  "median_latency_ms": 0.04,
+  "protected_mcp_tools": [
+    "stripe.payouts.create",
+    "sap.s4hana.idoc.post",
+    "netsuite.vendor_bill.pay",
+    "quickbooks.payment.execute"
+  ],
+  "enforced_invariants": {
+    "L1_exact_decimal_caps": {
+      "max_single_tx_usd": "50000.00",
+      "max_24h_velocity_usd": "150000.00",
+      "atomic_backend": ["redis_lua_cas", "postgres_serializable", "sqlite_wal"]
+    },
+    "L2_beneficiary_validation": ["iso_13616_mod97_iban", "strict_corporate_allowlist"],
+    "L3_replay_protection": "cryptographic_nonce_mutex",
+    "L4_payload_canonicalization": ["nfkc_normalization", "bidi_strip", "shannon_entropy_check"],
+    "L5_executive_quorum": {
+      "threshold_usd": "10000.00",
+      "signature_algorithm": "Ed25519",
+      "dispatch_channels": ["slack", "whatsapp", "email"],
+      "one_time_lock": "redis_setnx"
+    },
+    "L6_audit_ledger": {
+      "hash_chain": "sequential_hmac_sha256",
+      "compliance_export": ["SOX", "SOC2"]
+    }
+  }
+}
